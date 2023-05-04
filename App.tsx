@@ -1,4 +1,4 @@
-import {Tabs} from './src/routes/Tabs';
+import {AppTabs} from './src/routes/Tabs';
 export const App = () => {
-  return <Tabs />;
+  return <AppTabs />;
 };
