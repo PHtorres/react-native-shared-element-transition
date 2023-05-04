@@ -1,30 +1,39 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {House, GearSix} from 'phosphor-react-native';
-import { TabBar } from '../components/TabBar';
+import {TabBar} from '../components/TabBar';
+import Animated, {SlideInLeft} from 'react-native-reanimated';
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </View>
-  );
+interface ScreenProps {
+  title: string;
 }
 
-function SettingsScreen() {
+function Screen({title}: ScreenProps) {
   return (
-    <View
+    <Animated.View
+      entering={SlideInLeft}
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'red',
+        backgroundColor: '#fffff4',
       }}>
-      <Text>Settings!</Text>
-    </View>
+      <Text style={{fontSize: 20, fontWeight: 'bold'}}>{title}</Text>
+    </Animated.View>
   );
+}
+
+function HomeScreen() {
+  return <Screen title="Home" />;
+}
+
+function ProfileScreen() {
+  return <Screen title="Profile" />;
+}
+
+function SettingsScreen() {
+  return <Screen title="Settings" />;
 }
 
 const Tab = createBottomTabNavigator();
@@ -32,31 +41,9 @@ const Tab = createBottomTabNavigator();
 export const Tabs = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-      tabBar={(props) => <TabBar props={props}/>}
-        // screenOptions={({route}) => ({
-        // tabbar
-        //   tabBarIcon: ({focused, color, size}) => {
-        //     let iconName;
-
-        //     if (route.name === 'Home') {
-        //       // iconName = focused
-        //       //   ? 'ios-information-circle'
-        //       //   : 'ios-information-circle-outline';
-        //       return <House />;
-        //     } else if (route.name === 'Settings') {
-        //       //iconName = focused ? 'ios-list' : 'ios-list-outline';
-        //       return <GearSix />;
-        //     }
-
-        //     // You can return any component that you like here!
-        //     //return <Ionicons name={iconName} size={size} color={color} />;
-        //   },
-        //   tabBarActiveTintColor: 'tomato',
-        //   tabBarInactiveTintColor: 'gray',
-        // })}
-        >
+      <Tab.Navigator tabBar={props => <TabBar props={props} />}>
         <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
