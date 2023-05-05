@@ -1,6 +1,6 @@
 
-# Animated Bottom Navigation
-Animated bottom navigation with React Native, React Navigation and Reanimated V3.
+# Shared Element Transition
+Shared Element Transition with React Native, React Navigation and Reanimated V3.
 
 
 ## Demo
